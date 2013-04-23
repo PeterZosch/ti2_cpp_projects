@@ -1,7 +1,7 @@
 
-texteditor:	src/main.cpp 
+texteditor.bin:	src/main.cpp 
 		g++ -Wall -o $@ $<
 
 clean:
-		rm -f texteditor
+		rm -f texteditor.bin
 
