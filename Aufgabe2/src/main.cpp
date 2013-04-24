@@ -79,12 +79,17 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 	system( "clear" );
 	
 	cout << "Die aktuellen Werte der Bauteile:\n" << endl;
-
-	cout << "R = " << r1.Get_Value() << " Ohm  |  "
-	     << "L = " << l1.Get_Value() << " Henri  |  "
-	     << "C = " << c1.Get_Value() << " Farrad  |  "
-	     << "Ue = " << Ue << " Volt" << endl;
 	
+	try {
+	
+		cout << "R = " << r1.Get_Value() << " Ohm  |  "
+		     << "L = " << l1.Get_Value() << " Henri  |  "
+		     << "C = " << c1.Get_Value() << " Farrad  |  "
+		     << "Ue = " << Ue << " Volt" << endl;
+	} catch( char* valerr ) { 
+		cout << valerr << endl ;
+	  }
+
 	cout << "\n\nWollen Sie die Werte ändern? (y/n)" << endl;
     cout << endl << (">");
     cin.get(key);
