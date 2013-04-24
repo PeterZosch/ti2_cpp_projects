@@ -71,14 +71,16 @@ int main()
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 {
 	char key;
+	double newValue;
+
 	system( "clear" );
 	
-	cout << "Die aktuellen Werte der Bauteile:\n";
+	cout << "Die aktuellen Werte der Bauteile:\n" << endl;
 
-	cout << "R = " << r1.Get_Value() << " Ohm" << endl;
-	cout << "L = " << l1.Get_Value() << " Henri" << endl;
-	cout << "C = " << c1.Get_Value() << " Farrad" << endl;
-	cout << "Ue = " << Ue << " Volt" << endl;
+	cout << "R = " << r1.Get_Value() << " Ohm  |  "
+	     << "L = " << l1.Get_Value() << " Henri  |  "
+	     << "C = " << c1.Get_Value() << " Farrad  |  "
+	     << "Ue = " << Ue << " Volt" << endl;
 	
 	cout << "\n\nWollen Sie die Werte ändern? (y/n)" << endl;
     cout << endl << (">");
@@ -86,7 +88,21 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
     cin.ignore();
 
 	if ( key == 'y' ) {
-		cout << "FileHandler aufruf" << endl;
+		cout << "R = ";
+		cin >> newValue;
+		r1.Set_Value( newValue );
+		cout << "L = ";
+		cin >> newValue;
+		l1.Set_Value( newValue );
+		cout << "C = ";
+		cin >> newValue;
+		c1.Set_Value( newValue );
+		cout << "Ue = ";
+		cin >> newValue;
+		Ue =  newValue;
+	
+		changeValues( r1, l1, c1, Ue );
+	
 	} else {
 		return 0;
 	}
