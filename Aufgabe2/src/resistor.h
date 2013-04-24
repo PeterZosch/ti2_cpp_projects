@@ -17,5 +17,12 @@ public:
 	double Get_Ampere()  { return amp_R.at( amp_R.size() - 1 ); }
 
 	void Reset() { volt_R.clear(); amp_R.clear(); }
+
+    typedef std::vector<double>::iterator iterator;
+    iterator beginA() { return amp_R.begin(); };
+    iterator endA() { return amp_R.end(); };
+    iterator beginV() { return volt_R.begin(); };
+    iterator endV() { return volt_R.end(); };
+
 }; 
 

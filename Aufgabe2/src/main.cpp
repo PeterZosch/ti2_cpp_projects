@@ -33,7 +33,6 @@ int main()
 	c1.Set_Voltage( 0 );
 	l1.Set_Ampere( 0 );
 
-
 	do{
 		system("clear");
 
@@ -71,7 +70,7 @@ int main()
 
 int changeValues()
 {
-
+	return 0;
 }
 
 
@@ -79,7 +78,8 @@ int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue)
 {
 	char key;
 	
-	for ( int i = 0 ; i <= 100 ; i++ ) {
+	//Berechnung
+	for ( int i = 0 ; i <= 50 ; i++ ) {
 
 		r1.Set_Ampere( l1.Get_Ampere() );
 		r1.Set_Voltage( r1.Get_Ampere() * r1.Get_Value() );
@@ -87,8 +87,11 @@ int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue)
 		c1.Set_Ampere( l1.Get_Ampere() );
 		c1.Set_Voltage( c1.Get_Voltage() + ( c1.Get_Ampere() / c1.Get_Value() ) );
 		l1.Set_Ampere( l1.Get_Ampere() + ( l1.Get_Voltage() / l1.Get_Value() ) );
+	}
 
-		cout << c1.Get_Voltage() << endl;
+	//Ausgabe über Iterator
+	for (Capacitor::iterator it = c1.beginV(); it != c1.endV(); ++it){
+		cout << *it << endl;
 	}
 	
 	cout << "\nWollen Sie die Ausgabe in eine Datei speichern? (y/n)" << endl;
@@ -101,4 +104,5 @@ int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue)
 	} else {
 		return 0;
 	}
+	return 0;
 }
