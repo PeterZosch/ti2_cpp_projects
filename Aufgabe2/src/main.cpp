@@ -12,8 +12,8 @@
 
 using namespace std;
 
-int changeValues();
-int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue);
+int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
+int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 void history();
 
 int main() 
@@ -50,7 +50,7 @@ int main()
 
         switch(key){
 
-            case 'c':	changeValues();	
+            case 'c':	changeValues(r1, l1, c1, Ue);	
                     	break;
 
             case 'a':	calculateUc(r1, l1, c1, Ue);	
@@ -68,8 +68,29 @@ int main()
 }
 
 
-int changeValues()
+int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 {
+	char key;
+	system( "clear" );
+	
+	cout << "Die aktuellen Werte der Bauteile:\n";
+
+	cout << "R = " << r1.Get_Value() << " Ohm" << endl;
+	cout << "L = " << l1.Get_Value() << " Henri" << endl;
+	cout << "C = " << c1.Get_Value() << " Farrad" << endl;
+	cout << "Ue = " << Ue << " Volt" << endl;
+	
+	cout << "\n\nWollen Sie die Werte ändern? (y/n)" << endl;
+    cout << endl << (">");
+    cin.get(key);
+    cin.ignore();
+
+	if ( key == 'y' ) {
+		cout << "FileHandler aufruf" << endl;
+	} else {
+		return 0;
+	}
+
 	return 0;
 }
 
