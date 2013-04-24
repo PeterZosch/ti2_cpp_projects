@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <vector>
 #include <cstdlib>
@@ -11,13 +12,14 @@
 #define STD_C 0.5
 #define STD_UE 10
 #define OFILE "Uc_out.csv"
+#define setp setprecision
 
 using namespace std;
 
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 void writeTo( Capacitor& c1 );
-void history();
+void history( Resistor& r1, Inductor& l1, Capacitor& c1);
 
 int main() 
 {
@@ -37,7 +39,7 @@ int main()
 	l1.Set_Ampere( 0 );
 
 	do{
-		system("clear");
+		system( "clear" );
 
         cout << endl << "Hautpmenue";
         cout << endl << "----------";
@@ -46,26 +48,26 @@ int main()
         cout << endl << "(h) Historien";
         cout << endl << "(q) Quit";
 
-        cout << endl << (">");
+        cout << endl << ">";
 
-        cin.get(key);
+        cin.get( key );
         cin.ignore();
 
-        switch(key){
+        switch ( key ){
 
-            case 'c':	changeValues(r1, l1, c1, Ue);	
+            case 'c':	changeValues( r1, l1, c1, Ue );	
                     	break;
 
-            case 'a':	calculateUc(r1, l1, c1, Ue);	
+            case 'a':	calculateUc( r1, l1, c1, Ue );	
                     	break;
             
-			case 'h':	cout << "Historien Funktion" << endl;
+			case 'h':	history( r1, l1, c1 );
                     	break;
 
             case 'q':   return 0;
 
         }
-    }while(key != 'q');
+    } while ( key != 'q' );
 
 	return 0;
 }
@@ -86,8 +88,8 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 	     << "Ue = " << Ue << " Volt" << endl;
 	
 	cout << "\n\nWollen Sie die Werte ändern? (y/n)" << endl;
-    cout << endl << (">");
-    cin.get(key);
+    cout << endl << ">";
+    cin.get( key );
     cin.ignore();
 
 	if ( key == 'y' ) {
@@ -114,7 +116,7 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 }
 
 
-int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue)
+int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 {
 	char key;
 	
@@ -130,13 +132,13 @@ int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue)
 	}
 
 	//Ausgabe über Iterator
-	for (Capacitor::iterator it = c1.beginV(); it != c1.endV(); ++it){
+	for ( Capacitor::iterator it = c1.beginV() ; it != c1.endV() ; ++it ) {
 		cout << *it << endl;
 	}
 	
 	cout << "\nWollen Sie die Ausgabe in eine Datei speichern? (y/n)" << endl;
-    cout << endl << (">");
-    cin.get(key);
+    cout << endl << ">";
+    cin.get( key );
     cin.ignore();
 
 	if ( key == 'y' ) {
@@ -147,7 +149,7 @@ int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue)
 	return 0;
 }
 
-void writeTo( Capacitor &c1 )
+void writeTo( Capacitor& c1 )
 {
 
 	ofstream oFile;
@@ -164,7 +166,28 @@ void writeTo( Capacitor &c1 )
 }
 
 
-void history()
+void history( Resistor& r1, Inductor& l1, Capacitor& c1)
 {
+ 	char key;
+		
+	//Iteratoren erstellen für alle Objekte
+	Capacitor::iterator itCv = c1.beginV();
+	Capacitor::iterator itCa = c1.beginA();
+	Inductor::iterator itLv = l1.beginV();
+	Inductor::iterator itLa = l1.beginA();
+	Resistor::iterator itRv = r1.beginV();
+	Resistor::iterator itRa = r1.beginA();
+	
+	cout << setw(10) << setp(5) << fixed << "Uc" << " | " << setw(10) << setp(5) << "Ic" << " | " 
+		 << setw(10) << setp(5) << "Ul" << " | " << setw(10) << setp(5) << "Il" << " | " 
+		 << setw(10) << setp(5) << "Ur" << " | " << setw(10) << setp(5) << "Ir" << endl;	
+
+	for ( ; itCv != c1.endV() ; ++itCv, ++itCa, ++itLv, ++itLa, ++itRv, ++itRa ) {
+		cout << setw(10) << setp(5) << fixed << *itCv << " | " << setw(10) << setp(5) << *itCa << " | " 
+			 << setw(10) << setp(5) << *itLv << " | " << setw(10) << setp(5) << *itLa << " | " 
+			 << setw(10) << setp(5) << *itRv << " | " << setw(10) << setp(5) << *itRa << endl;	
+	}
+
+	cin.get( key );	
 
 }
