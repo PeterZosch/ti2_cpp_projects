@@ -16,8 +16,8 @@ using namespace std;
 
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
-void history();
 void writeTo( Capacitor& c1 );
+void history();
 
 int main() 
 {
@@ -161,4 +161,10 @@ void writeTo( Capacitor &c1 )
 	}
 	
 	oFile.close();
+}
+
+
+void history()
+{
+
 }

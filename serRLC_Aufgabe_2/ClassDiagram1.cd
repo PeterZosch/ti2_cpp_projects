@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CSpule">
+    <Position X="2.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAQAAAQAAAAAAAAAAAAQAABwAMgACkA=</HashCode>
+      <FileName>Spule.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CWiderstand">
+    <Position X="4" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAFAAAAAAAAAQAAAQAAAQAAIAIAAAQAABAAEAAAEA=</HashCode>
+      <FileName>Widerstand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
