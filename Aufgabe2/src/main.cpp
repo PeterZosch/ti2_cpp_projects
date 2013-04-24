@@ -12,7 +12,7 @@
 
 using namespace std;
 
-void changeValues();
+int changeValues();
 int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue);
 void history();
 
@@ -51,7 +51,7 @@ int main()
 
         switch(key){
 
-            case 'c':	cout << "Anzeigen und Ändern Funktion" << endl;
+            case 'c':	changeValues();	
                     	break;
 
             case 'a':	calculateUc(r1, l1, c1, Ue);	
@@ -66,6 +66,12 @@ int main()
     }while(key != 'q');
 
 	return 0;
+}
+
+
+int changeValues()
+{
+
 }
 
 
