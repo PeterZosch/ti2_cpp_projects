@@ -8,13 +8,13 @@ class Capacitor
 
 public:
 	
-	void Push_Value( double newValue ) { valueC = newValue; }
-	void Push_Voltage( double newVolt )  { volt_C.push_back( newVolt ); }	
-	void Push_Ampere( double newAmp )    { amp_C.push_back( newAmp ); }	
+	void Set_Value( double newValue ) { valueC = newValue; }
+	void Set_Voltage( double newVolt )  { volt_C.push_back( newVolt ); }	
+	void Set_Ampere( double newAmp )    { amp_C.push_back( newAmp ); }	
 
-	double Pull_Value(void)   { return valueC; }
-	double Pull_Voltage() { return volt_C.at( volt_C.size() - 1 ); }
-	double Pull_Ampere()  { return amp_C.at( amp_C.size() - 1 ); }
+	double Get_Value(void)   { return valueC; }
+	double Get_Voltage() { return volt_C.at( volt_C.size() - 1 ); }
+	double Get_Ampere()  { return amp_C.at( amp_C.size() - 1 ); }
 
 	void Reset() { volt_C.clear(); amp_C.clear(); }
 };
