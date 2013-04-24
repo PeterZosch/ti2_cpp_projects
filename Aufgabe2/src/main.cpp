@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <cstdlib>
 #include "resistor.h"
@@ -9,12 +10,14 @@
 #define STD_L 20
 #define STD_C 0.5
 #define STD_UE 10
+#define OFILE "Uc_out.csv"
 
 using namespace std;
 
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 void history();
+void writeTo( Capacitor& c1 );
 
 int main() 
 {
@@ -121,9 +124,25 @@ int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue)
     cin.ignore();
 
 	if ( key == 'y' ) {
-		cout << "FileHandler aufruf" << endl;
+		writeTo( c1 );
 	} else {
 		return 0;
 	}
 	return 0;
+}
+
+void writeTo( Capacitor &c1 )
+{
+
+	ofstream oFile;
+
+	oFile.open( OFILE );
+
+	for ( Capacitor::iterator it = c1.beginV() ; it != c1.endV() ; ++it  ) {
+	
+		oFile << *it <<  ";" ; 
+
+	}
+	
+	oFile.close();
 }
