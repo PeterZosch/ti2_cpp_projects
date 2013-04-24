@@ -1,7 +1,9 @@
 
-RLCsim.bin: src/main.cpp
+NAME = RLCsim
+ 
+$(NAME).bin: src/main.cpp
 		g++ -Wall -o $@ $<
 
 clean:
-		rm -f RLCsim.bin
+		rm -f $(NAME).bin
 

@@ -1,7 +1,8 @@
 
-texteditor.bin:	src/main.cpp 
+NAME = texteditor
+$(NAME).bin:	src/main.cpp 
 		g++ -Wall -o $@ $<
 
 clean:
-		rm -f texteditor.bin
+		rm -f $(NAME).bin
 
