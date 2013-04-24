@@ -119,7 +119,7 @@ int calculateUc(Resistor &r1, Inductor &l1, Capacitor &c1, double &Ue)
 	char key;
 	
 	//Berechnung
-	for ( int i = 0 ; i <= 50 ; i++ ) {
+	for ( int i = 0 ; i <= 100 ; i++ ) {
 
 		r1.Set_Ampere( l1.Get_Ampere() );
 		r1.Set_Voltage( r1.Get_Ampere() * r1.Get_Value() );
