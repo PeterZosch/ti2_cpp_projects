@@ -183,16 +183,23 @@ void history( Resistor& r1, Inductor& l1, Capacitor& c1)
 	Resistor::iterator itRv = r1.beginV();
 	Resistor::iterator itRa = r1.beginA();
 	
-	cout << setw(10) << fixed << "    Uc    " << " | " << setw(10) << "    Ic    " << " | " 
-		 << setw(10) << "    Ul    " << " | " << setw(10) << "    Il    " << " | " 
-		 << setw(10) << "    Ur    " << " | " << setw(10) << "    Ir    " << " | " << endl;
+	cout << setw(10) << fixed << "    Uc    " << " | " 
+		 << setw(10) << "    Ic    " << " | " 
+		 << setw(10) << "    Ul    " << " | " 
+		 << setw(10) << "    Il    " << " | " 
+		 << setw(10) << "    Ur    " << " | " 
+		 << setw(10) << "    Ir    " << " | " << endl;
 
-	cout << "-----------------------------------------------------------------------------" << endl;
+	cout << "-----------------------------------------"
+		 << "------------------------------------" << endl;
 
 	for ( ; itCv != c1.endV() ; ++itCv, ++itCa, ++itLv, ++itLa, ++itRv, ++itRa ) {
-		cout << setw(10) << setp(6) << fixed << *itCv << " | " << setw(10) << setp(6) << *itCa << " | " 
-			 << setw(10) << setp(6) << *itLv << " | " << setw(10) << setp(6) << *itLa << " | " 
-			 << setw(10) << setp(6) << *itRv << " | " << setw(10) << setp(6) << *itRa << " | " <<endl;	
+		cout << setw(10) << setp(6) << fixed << *itCv << " | " 
+			 << setw(10) << setp(6) << *itCa << " | " 
+			 << setw(10) << setp(6) << *itLv << " | " 
+			 << setw(10) << setp(6) << *itLa << " | " 
+			 << setw(10) << setp(6) << *itRv << " | " 
+			 << setw(10) << setp(6) << *itRa << " | " <<endl;	
 	}
 	
 	cout << "\n Wollen Sie die Historie löschen? (y/n)" << endl;
