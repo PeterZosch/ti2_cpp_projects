@@ -21,6 +21,14 @@ int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 void writeTo( Capacitor& c1 );
 void history( Resistor& r1, Inductor& l1, Capacitor& c1);
 
+
+/*
+===============================================================================
+main
+
+Hauptmenü mit Menüauswahl und Objekterstellung der einzelnen Klassen
+===============================================================================
+*/
 int main() 
 {
 	Resistor r1;
@@ -73,6 +81,14 @@ int main()
 }
 
 
+/*
+===============================================================================
+changeValues
+
+Funktion um die Defaultwerte für Widerstand, Spule und Kondensator zu 
+ändern und diese Auszugeben
+===============================================================================
+*/
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 {
 	char key;
@@ -95,31 +111,34 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 
 	if ( key == 'y' ) {
 
-	try {
-		cout << "R = ";
-		cin >> newValue;
-		r1.Set_Value( newValue );
-		cout << "L = ";
-		cin >> newValue;
-		l1.Set_Value( newValue );
-		cout << "C = ";
-		cin >> newValue;
-		c1.Set_Value( newValue );
-		cout << "Ue = ";
-		cin >> newValue;
-		Ue =  newValue;
+		try {
+			cout << "R = ";
+			cin >> newValue;
+			r1.Set_Value( newValue );
+			cout << "L = ";
+			cin >> newValue;
+			l1.Set_Value( newValue );
+			cout << "C = ";
+			cin >> newValue;
+			c1.Set_Value( newValue );
+			cout << "Ue = ";
+			cin >> newValue;
+			Ue =  newValue;
 	
-		changeValues( r1, l1, c1, Ue );
+			//Aufruf von sich selbst, um die aktuellen Werte anzuzeigen
+			changeValues( r1, l1, c1, Ue );
 	
-	} catch ( char* valerr ) { 
+		} catch ( char* valerr ) { 
 
-		cout << valerr << endl ;
-		cout << "Press anykey to continue " << endl << "> " ;	
-		cin.get(key);
-		cin.ignore();
-	}
+			cout << valerr << endl ;
+			cout << "Press anykey to continue " << endl << "> " ;	
+			
+			cin.get( key );
+			cin.ignore();
+		}
 
 	} else {
+
 		return 0;
 	}
 
@@ -127,6 +146,19 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 }
 
 
+/*
+===============================================================================
+calculateUc
+
+Funktion um die Kondensatorspannung zu Berechnen
+Ir = Il
+Ur = Ir * R
+Ul = Ue - Ur - Uc
+Ic = Il
+Uc = Uc + (Ic / C)
+Il = Il + (Ul / L) 
+===============================================================================
+*/
 int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 {
 	char key;
@@ -138,8 +170,8 @@ int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 		r1.Set_Voltage( r1.Get_Ampere() * r1.Get_Value() );
 		l1.Set_Voltage( Ue - r1.Get_Voltage() - c1.Get_Voltage() );
 		c1.Set_Ampere( l1.Get_Ampere() );
-		c1.Set_Voltage( c1.Get_Voltage() + ( c1.Get_Ampere() / c1.Get_Value() ) );
-		l1.Set_Ampere( l1.Get_Ampere() + ( l1.Get_Voltage() / l1.Get_Value() ) );
+		c1.Set_Voltage( c1.Get_Voltage() + (c1.Get_Ampere() / c1.Get_Value()) );
+		l1.Set_Ampere( l1.Get_Ampere() + (l1.Get_Voltage() / l1.Get_Value()) );
 	}
 
 	//Ausgabe über Iterator
@@ -153,42 +185,62 @@ int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
     cin.ignore();
 
 	if ( key == 'y' ) {
+
 		writeTo( c1 );
+
 	} else {
+
 		return 0;
 	}
+
 	return 0;
 }
 
+/*
+===============================================================================
+writeTo
+
+Funktion um die Berechnete Kondensator Spannug in eine "csv"-Datei zu speichern
+===============================================================================
+*/
 void writeTo( Capacitor& c1 )
 {
 
 	ofstream oFile;
-
 	oFile.open( OFILE );
 
 	for ( Capacitor::iterator it = c1.beginV() ; it != c1.endV() ; ++it  ) {
 	
 		oFile << *it <<  ";" ; 
-
 	}
 	
 	oFile.close();
 }
 
 
-void history( Resistor& r1, Inductor& l1, Capacitor& c1)
+/*
+===============================================================================
+history
+
+Funktion um über alle Bauteile zu iterieren und diese Formatiert auszugeben
+Dies stellt die Vergangenheit jedes Bauteils dar (Spannung und Strom) 
+===============================================================================
+*/
+void history( Resistor& r1, Inductor& l1, Capacitor& c1 )
 {
  	char key;
 		
 	//Iteratoren erstellen für alle Objekte
 	Capacitor::iterator itCv = c1.beginV();
 	Capacitor::iterator itCa = c1.beginA();
+	
 	Inductor::iterator itLv = l1.beginV();
 	Inductor::iterator itLa = l1.beginA();
+	
 	Resistor::iterator itRv = r1.beginV();
 	Resistor::iterator itRa = r1.beginA();
-	
+
+	//Kopfausgabe der History	
 	cout << setw(10) << fixed << "    Uc    " << " | " 
 		 << setw(10) << "    Ic    " << " | " 
 		 << setw(10) << "    Ul    " << " | " 
@@ -199,7 +251,9 @@ void history( Resistor& r1, Inductor& l1, Capacitor& c1)
 	cout << "-----------------------------------------"
 		 << "------------------------------------" << endl;
 
-	for ( ; itCv != c1.endV() ; ++itCv, ++itCa, ++itLv, ++itLa, ++itRv, ++itRa ) {
+	//Iteration über einen Vektor aber inkrementierung aller Vektoren
+	for ( ; itCv != c1.endV() ; ++itCv, ++itCa, ++itLv, ++itLa, ++itRv, ++itRa )
+	{
 		cout << setw(10) << setp(6) << fixed << *itCv << " | " 
 			 << setw(10) << setp(6) << *itCa << " | " 
 			 << setw(10) << setp(6) << *itLv << " | " 
