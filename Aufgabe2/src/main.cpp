@@ -82,22 +82,20 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 	
 	cout << "Die aktuellen Werte der Bauteile:\n" << endl;
 	
-	try {
-	
 		cout << "R = " << r1.Get_Value() << " Ohm  |  "
 		     << "L = " << l1.Get_Value() << " Henri  |  "
 		     << "C = " << c1.Get_Value() << " Farrad  |  "
 		     << "Ue = " << Ue << " Volt" << endl;
-	} catch( const char* valerr ) { 
-		cout << valerr << endl ;
-	  }
 
 	cout << "\n\nWollen Sie die Werte ändern? (y/n)" << endl;
     cout << endl << ">";
     cin.get( key );
     cin.ignore();
 
+
 	if ( key == 'y' ) {
+
+	try {
 		cout << "R = ";
 		cin >> newValue;
 		r1.Set_Value( newValue );
@@ -113,6 +111,14 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 	
 		changeValues( r1, l1, c1, Ue );
 	
+	} catch ( char* valerr ) { 
+
+		cout << valerr << endl ;
+		cin.ignore();
+		cout << "Press anykey to continue " << endl << "> " ;	
+		cin.get(key);
+	}
+
 	} else {
 		return 0;
 	}
