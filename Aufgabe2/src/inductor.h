@@ -8,7 +8,14 @@ class Inductor
 
 public:
 	
-	void Set_Value( double newValue ) { valueL = newValue; }
+	void Set_Value( double newValue )
+    {
+        if( newValue <= 0  ) {
+            throw "Eingegebener Wert für den L ist ungültig !" ;
+        }
+    valueL = newValue;
+    }
+
 	void Set_Voltage( double newVolt )  { volt_L.push_back( newVolt ); }	
 	void Set_Ampere( double newAmp )    { amp_L.push_back( newAmp ); }	
 

@@ -8,7 +8,14 @@ class Capacitor
 
 public:
 	
-	void Set_Value( double newValue ) { valueC = newValue; }
+	void Set_Value( double newValue )
+    {
+        if( newValue <= 0  ) {
+            throw "Eingegebener Wert für den C ist ungültig !" ;
+        }
+    valueC = newValue;
+    }
+ 
 	void Set_Voltage( double newVolt )  { volt_C.push_back( newVolt ); }	
 	void Set_Ampere( double newAmp )    { amp_C.push_back( newAmp ); }	
 
