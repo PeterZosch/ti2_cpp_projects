@@ -1,21 +1,39 @@
+/*
+===============================================================================
+RLC-Simulator - C++
+
+	by Tobias Theile und Alexander Koch
+	versioniert via github - PeterZosch
+===============================================================================
+*/
+
+//Standardincludes
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 #include <vector>
 #include <cstdlib>
+
+//Eigene Klassen
 #include "resistor.h"
 #include "capacitor.h"
 #include "inductor.h"
 
+//Defaultwerte für R, L, C, Ue
 #define STD_R 10
 #define STD_L 20
 #define STD_C 0.5
 #define STD_UE 10
+
+//Default AusgabeDatei
 #define OFILE "Uc_out.csv"
+
+//Verkürzung des Befehls setprecision in cout auf setp
 #define setp setprecision
 
 using namespace std;
 
+//Funktionsprototypen
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 void writeTo( Capacitor& c1 );
