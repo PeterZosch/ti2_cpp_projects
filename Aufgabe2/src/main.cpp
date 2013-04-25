@@ -100,7 +100,7 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 	
 	cout << "R = " << r1.Get_Value() << " Ohm  |  "
 	     << "L = " << l1.Get_Value() << " Henri  |  "
-	     << "C = " << c1.Get_Value() << " Farrad  |  "
+	     << "C = " << c1.Get_Value() << " Farad  |  "
 	     << "Ue = " << Ue << " Volt" << endl;
 
 	cout << "\n\nWollen Sie die Werte ändern? (y/n)" << endl;
