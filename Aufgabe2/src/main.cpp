@@ -146,9 +146,9 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 			//Aufruf von sich selbst, um die aktuellen Werte anzuzeigen
 			changeValues( r1, l1, c1, Ue );
 	
-		} catch ( char* valerr ) { 
+		} catch ( char *err ) { 
 
-			cout << valerr << endl ;
+			cout << err << endl ;
 			cout << "Press anykey to continue " << endl << "> " ;	
 			
 			cin.get( key );
