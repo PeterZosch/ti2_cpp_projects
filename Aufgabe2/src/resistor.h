@@ -8,13 +8,7 @@ class Resistor
 
 public:
 
-	void Set_Value( double newValue ) 
-	{ 
-		if( newValue <= 0  ) {
-        	throw ( char * ) "Eingegebener Wert für den R ist ungültig !" ;
-    	}
-    valueR = newValue;
-	}
+	void Set_Value( double newValue );
  
 	void Set_Voltage( double newVolt )  { volt_R.push_back( newVolt ); }	
 	void Set_Ampere( double newAmp )    { amp_R.push_back( newAmp ); }	

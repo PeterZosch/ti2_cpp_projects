@@ -1,8 +1,11 @@
 
 NAME = RLCsim
+SRCPATH = src/
+
  
-$(NAME).bin: src/main.cpp
-		g++ -Wall -o $@ $<
+$(NAME).bin: 
+
+		g++ -Wall $(SRCPATH)*.cpp  -o $@
 
 clean:
 		rm -f $(NAME).bin
