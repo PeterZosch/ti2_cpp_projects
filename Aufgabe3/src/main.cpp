@@ -15,9 +15,7 @@ RLC-Simulator - C++
 #include <cstdlib>
 
 //Eigene Klassen
-#include "resistor.h"
-#include "capacitor.h"
-#include "inductor.h"
+#include "elements.h"
 
 //Defaultwerte für R, L, C, Ue
 #define STD_R 10
@@ -33,12 +31,19 @@ RLC-Simulator - C++
 
 using namespace std;
 
+//Abgeleitete Klassen
+class Resistor : public Elements {
+};
+class Inductor : public Elements {
+};
+class Capacitor : public Elements {
+};
+
 //Funktionsprototypen
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 void writeTo( Capacitor& c1 );
 void history( Resistor& r1, Inductor& l1, Capacitor& c1);
-
 
 /*
 ===============================================================================
@@ -291,3 +296,4 @@ void history( Resistor& r1, Inductor& l1, Capacitor& c1 )
 		c1.Reset();
 	} 
 }
+
