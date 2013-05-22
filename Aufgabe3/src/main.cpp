@@ -33,11 +33,20 @@ using namespace std;
 
 //Abgeleitete Klassen
 class Resistor : public Elements {
-};
+/*private:
+	double value;
+	std::vector<double> amp, volt; 
+*/};
 class Inductor : public Elements {
-};
+/*private:
+	double value;
+	std::vector<double> amp, volt; 
+*/};
 class Capacitor : public Elements {
-};
+/*private:
+	double value;
+	std::vector<double> amp, volt; 
+*/};
 
 //Funktionsprototypen
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
@@ -274,6 +283,7 @@ void history( Resistor& r1, Inductor& l1, Capacitor& c1 )
 	cout << "-----------------------------------------"
 		 << "------------------------------------" << endl;
 
+	itLa[0] = 666;
 	//Iteration über einen Vektor aber inkrementierung aller Vektoren
 	for ( ; itCv != c1.endV() ; ++itCv, ++itCa, ++itLv, ++itLa, ++itRv, ++itRa )
 	{

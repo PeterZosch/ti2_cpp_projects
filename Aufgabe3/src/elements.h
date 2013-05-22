@@ -2,12 +2,11 @@
 
 class Elements
 {
+	double value;
+	std::vector<double> amp, volt;
 
 public:
 
-	double value;
-	std::vector<double> amp, volt;
-	
 	virtual void Set_Value( double newValue );
  
 	virtual void Set_Voltage( double newVolt )  { volt.push_back( newVolt ); }	
