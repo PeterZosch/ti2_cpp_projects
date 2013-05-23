@@ -33,20 +33,13 @@ using namespace std;
 
 //Abgeleitete Klassen
 class Resistor : public Elements {
-/*private:
-	double value;
-	std::vector<double> amp, volt; 
-*/};
+};
+
 class Inductor : public Elements {
-/*private:
-	double value;
-	std::vector<double> amp, volt; 
-*/};
+};
+
 class Capacitor : public Elements {
-/*private:
-	double value;
-	std::vector<double> amp, volt; 
-*/};
+};
 
 //Funktionsprototypen
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
@@ -63,6 +56,10 @@ Hauptmenü mit Menüauswahl und Objekterstellung der einzelnen Klassen
 */
 int main() 
 {
+
+	double Ue = STD_UE;
+	char key = 'q';
+	
 	Resistor r1;
 	Inductor l1;
 	Capacitor c1;
@@ -70,10 +67,6 @@ int main()
 	r1.Set_Value( STD_R );
 	l1.Set_Value( STD_L );
 	c1.Set_Value( STD_C );
-
-	double Ue = STD_UE;
-
-	char key = 'q';
 
 	c1.Set_Voltage( 0 );
 	l1.Set_Ampere( 0 );
@@ -137,6 +130,7 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 
 	cout << "\n\nWollen Sie die Werte ändern? (y/n)" << endl;
     cout << endl << ">";
+
     cin.get( key );
     cin.ignore();
 
@@ -144,6 +138,7 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 	if ( key == 'y' ) {
 
 		try {
+
 			cout << "R = ";
 			cin >> newValue;
 			r1.Set_Value( newValue );
@@ -208,6 +203,7 @@ int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 
 	//Ausgabe über Iterator
 	for ( Capacitor::iterator it = c1.beginV() ; it != c1.endV() ; ++it ) {
+
 		cout << *it << endl;
 	}
 	
@@ -283,7 +279,6 @@ void history( Resistor& r1, Inductor& l1, Capacitor& c1 )
 	cout << "-----------------------------------------"
 		 << "------------------------------------" << endl;
 
-	itLa[0] = 666;
 	//Iteration über einen Vektor aber inkrementierung aller Vektoren
 	for ( ; itCv != c1.endV() ; ++itCv, ++itCa, ++itLv, ++itLa, ++itRv, ++itRa )
 	{
@@ -301,6 +296,7 @@ void history( Resistor& r1, Inductor& l1, Capacitor& c1 )
     cin.ignore();
 
 	if ( key == 'y' ) {
+	
 		r1.Reset();
 		l1.Reset();
 		c1.Reset();
