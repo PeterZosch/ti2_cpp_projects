@@ -1,6 +1,6 @@
 #include <QtGui>  
-#include <qwt_plot.h>
-#include <qwt_plot_curve.h>
+#include </usr/include/qwt/qwt_plot.h>
+#include </usr/include/qwt/qwt_plot_curve.h>
 
 
 class CosinusData: public QwtSyntheticPointData
