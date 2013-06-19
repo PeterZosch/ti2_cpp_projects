@@ -15,9 +15,11 @@ RLC-Simulator - C++
 #include <cstdlib>
 
 //Eigene Klassen
-#include "resistor.h"
-#include "capacitor.h"
-#include "inductor.h"
+#include "elements.h"
+
+// Qt Includes
+#include <QApplication>
+#include <QWidget>
 
 //Defaultwerte für R, L, C, Ue
 #define STD_R 10
@@ -26,19 +28,28 @@ RLC-Simulator - C++
 #define STD_UE 10
 
 //Default AusgabeDatei
-#define OFILE "uc_out.csv"
+#define OFILE "Uc_out.csv"
 
 //Verkürzung des Befehls setprecision in cout auf setp
 #define setp setprecision
 
 using namespace std;
 
+//Abgeleitete Klassen
+class Resistor : public Elements {
+};
+
+class Inductor : public Elements {
+};
+
+class Capacitor : public Elements {
+};
+
 //Funktionsprototypen
 int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue );
 void writeTo( Capacitor& c1 );
 void history( Resistor& r1, Inductor& l1, Capacitor& c1);
-
 
 /*
 ===============================================================================
@@ -47,8 +58,20 @@ main
 Hauptmenü mit Menüauswahl und Objekterstellung der einzelnen Klassen
 ===============================================================================
 */
-int main() 
+int main( int argc, char *argv[] )
 {
+
+	QApplication app( argc, argv );
+
+	QWidget window;
+
+	window.resize( 250,150 );
+	window.setWindowTitle("RLC Simulator GUI");
+	window.show();
+	
+	double Ue = STD_UE;
+	char key = 'q';
+	
 	Resistor r1;
 	Inductor l1;
 	Capacitor c1;
@@ -56,10 +79,6 @@ int main()
 	r1.Set_Value( STD_R );
 	l1.Set_Value( STD_L );
 	c1.Set_Value( STD_C );
-
-	double Ue = STD_UE;
-
-	char key = 'q';
 
 	c1.Set_Voltage( 0 );
 	l1.Set_Ampere( 0 );
@@ -77,8 +96,7 @@ int main()
         cout << endl << ">";
 
         cin.get( key );
-//        cin.ignore();
-		while( cin.get() != '\n');
+        cin.ignore();
 
         switch ( key ){
 
@@ -96,7 +114,7 @@ int main()
         }
     } while ( key != 'q' );
 
-	return 0;
+	return app.exec();
 }
 
 
@@ -124,6 +142,7 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 
 	cout << "\n\nWollen Sie die Werte ändern? (y/n)" << endl;
     cout << endl << ">";
+
     cin.get( key );
     cin.ignore();
 
@@ -131,6 +150,7 @@ int changeValues( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 	if ( key == 'y' ) {
 
 		try {
+
 			cout << "R = ";
 			cin >> newValue;
 			r1.Set_Value( newValue );
@@ -195,6 +215,7 @@ int calculateUc( Resistor& r1, Inductor& l1, Capacitor& c1, double& Ue )
 
 	//Ausgabe über Iterator
 	for ( Capacitor::iterator it = c1.beginV() ; it != c1.endV() ; ++it ) {
+
 		cout << *it << endl;
 	}
 	
@@ -229,12 +250,8 @@ void writeTo( Capacitor& c1 )
 	oFile.open( OFILE );
 
 	for ( Capacitor::iterator it = c1.beginV() ; it != c1.endV() ; ++it  ) {
-
-		if ( it == c1.beginV() ){
-			oFile << *it ;
-		} else {
-			oFile << ';' << *it ;
-		} 
+	
+		oFile << *it <<  ";" ; 
 	}
 	
 	oFile.close();
@@ -291,8 +308,10 @@ void history( Resistor& r1, Inductor& l1, Capacitor& c1 )
     cin.ignore();
 
 	if ( key == 'y' ) {
+	
 		r1.Reset();
 		l1.Reset();
 		c1.Reset();
 	} 
 }
+
