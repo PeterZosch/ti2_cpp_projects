@@ -1,15 +1,15 @@
 #include <QtGui>
-#include "mywidget.h"
+#include "rlcwidget.h"
  
 int main( int argc, char **argv )
 {
 	QApplication app( argc, argv );
  
-	MyWidget myWidget;
+	RLCWidget rlcwidget;
 	
-	myWidget.resize(1200, 600);
-	myWidget.setWindowTitle("RLC-Simulator by TaK");
- 	myWidget.show();
+	rlcwidget.resize(1200, 600);
+	rlcwidget.setWindowTitle("RLC-Simulator by TaK");
+ 	rlcwidget.show();
  
   return app.exec();
 }
